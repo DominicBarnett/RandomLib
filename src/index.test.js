@@ -51,7 +51,7 @@ describe('random(n)', () => {
     });
   });
 
-  describe('random(n, o)', () => {
+describe('random(n, o)', () => {
     test('should return a number between n and o (inclusive)', () => {
       const n = 5;
       const o = 10;
@@ -92,5 +92,31 @@ describe('random(n)', () => {
       // Check that the result is between n and o (inclusive)
       expect(result).toBeGreaterThanOrEqual(n);
       expect(result).toBeLessThanOrEqual(o);
+    });
+  });
+
+describe('die(x)', () => {
+    test('should generate numbers between 1 and x (inclusive)', () => {
+      const x = 6;
+      const results = Array.from({ length: 1000 }, () => fb.die(x));
+      
+      // Check that all results are within the expected range
+      expect(results.every(result => result >= 1 && result <= x)).toBe(true);
+    });
+  
+    test('should handle edge case when x is 1', () => {
+      const x = 1;
+      const results = Array.from({ length: 1000 }, () => fb.die(x));
+      
+      // Check that all results are exactly 1
+      expect(results.every(result => result === 1)).toBe(true);
+    });
+  
+    test('should throw an error when x is 0', () => {
+      expect(() => fb.die(0)).toThrow("x must be greater than 0");
+    });
+  
+    test('should throw an error when x is negative', () => {
+      expect(() => fb.die(-1)).toThrow("x must be greater than 0");
     });
   });

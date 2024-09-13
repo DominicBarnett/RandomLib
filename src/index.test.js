@@ -120,3 +120,49 @@ describe('die(x)', () => {
       expect(() => fb.die(-1)).toThrow("x must be greater than 0");
     });
   });
+
+describe('shuffle(arr)', () => {
+    test('should return a shuffled copy of the array', () => {
+      const arr = [1, 2, 3, 4, 5];
+      const result = fb.shuffle(arr);
+  
+      // Check that the result is a different array instance
+      expect(result).not.toBe(arr);
+      
+      // Check that the result is a permutation of the input array
+      const isPermutation = result.length === arr.length &&
+                            result.every(item => arr.includes(item)) &&
+                            arr.every(item => result.includes(item));
+      expect(isPermutation).toBe(true);
+    });
+  
+    test('should not modify the original array', () => {
+      const arr = [1, 2, 3, 4, 5];
+      const arrCopy = arr.slice(); // Make a copy of the original array
+      fb.shuffle(arr);
+      expect(arr).toEqual(arrCopy); // Ensure the original array is unchanged
+    });
+  
+    test('should handle an empty array', () => {
+      const arr = [];
+      const result = fb.shuffle(arr);
+      expect(result).toEqual([]); // An empty array should remain empty
+    });
+  
+    test('should handle an array with a single element', () => {
+      const arr = [1];
+      const result = fb.shuffle(arr);
+      expect(result).toEqual([1]); // A single-element array should remain unchanged
+    });
+  
+    test('should handle an array with duplicate elements', () => {
+      const arr = [1, 1, 2, 2, 3, 3];
+      const result = fb.shuffle(arr);
+      
+      // Check that the result is a permutation of the input array
+      const isPermutation = result.length === arr.length &&
+                            result.every(item => arr.includes(item)) &&
+                            arr.every(item => result.includes(item));
+      expect(isPermutation).toBe(true);
+    });
+  });

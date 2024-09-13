@@ -29,8 +29,29 @@ function shuffle(arr) {
     return array;
   }
 
+function flip(t = 0.5) {
+    if (t > 1 || t < 0) {
+        throw "Only values between 0 and 1"
+    } else if (t == 1) {
+        return true
+    }
+    else if (t == 0){
+        return false
+    }
+    else{
+        randNum = random()
+        if(randNum < t){
+            return true
+        }
+        else {
+            return false
+        }
+    }
+}
+
 module.exports.random = random
 module.exports.randomN = randomN
 module.exports.randomNtoO = randomNtoO
 module.exports.die = die
 module.exports.shuffle = shuffle
+module.exports.flip = flip

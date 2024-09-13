@@ -166,3 +166,58 @@ describe('shuffle(arr)', () => {
       expect(isPermutation).toBe(true);
     });
   });
+
+describe('flip(t)', () => {
+    test('should return a boolean value', () => {
+      const result = fb.flip();
+      
+      // Check that the result is either true or false
+      expect(typeof result).toBe('boolean');
+    });
+  
+    test('should return true approximately 50% of the time when t = 0.5', () => {
+      const trials = 10000;
+      const results = Array.from({ length: trials }, () => fb.flip(0.5));
+      
+      // Count the number of true values
+      const trueCount = results.filter(result => result === true).length;
+      
+      // Check that the number of true values is approximately half the trials (with some tolerance)
+      expect(trueCount / trials).toBeGreaterThanOrEqual(0.45);
+      expect(trueCount / trials).toBeLessThanOrEqual(0.55);
+    });
+  
+    test('should return true almost all the time when t = 1', () => {
+      const trials = 1000;
+      const results = Array.from({ length: trials }, () => fb.flip(1));
+      
+      // Check that all values are true when t = 1
+      expect(results.every(result => result === true)).toBe(true);
+    });
+  
+    test('should return false almost all the time when t = 0', () => {
+      const trials = 1000;
+      const results = Array.from({ length: trials }, () => fb.flip(0));
+      
+      // Check that all values are false when t = 0
+      expect(results.every(result => result === false)).toBe(true);
+    });
+  
+    test('should return true approximately 30% of the time when t = 0.3', () => {
+      const trials = 10000;
+      const results = Array.from({ length: trials }, () => fb.flip(0.3));
+      
+      // Count the number of true values
+      const trueCount = results.filter(result => result === true).length;
+      
+      // Check that the number of true values is approximately 30% of the trials (with some tolerance)
+      expect(trueCount / trials).toBeGreaterThanOrEqual(0.25);
+      expect(trueCount / trials).toBeLessThanOrEqual(0.35);
+    });
+  
+    test('should handle edge cases where t is outside the range [0, 1]', () => {
+      // Assuming the function handles invalid t by either clamping or throwing an error
+      expect(() => fb.flip(-0.5)).toThrow();  // If function throws error for invalid t
+      expect(() => fb.flip(1.5)).toThrow();   // Adjust based on your expected behavior
+    });
+  });

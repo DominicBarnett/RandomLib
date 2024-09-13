@@ -3,17 +3,15 @@ function random() {
     return number
 }
 
-// function randomN(n) {
-//     LastNumber = n
-//     number = (Math.random() * 10) * n
-//     return number
-// }
 function randomN(n) {
-    const LastNumber = n;
     const number = Math.floor(Math.random() * (n + 1));  // Whole number between 0 and n
     return number;
   }
   
+function randomNtoO(n, o) {
+    return Math.floor(Math.random() * (o - n + 1) + n)
+}
 
 module.exports.random = random
 module.exports.randomN = randomN
+module.exports.randomNtoO = randomNtoO

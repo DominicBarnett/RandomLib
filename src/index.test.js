@@ -50,3 +50,47 @@ describe('random(n)', () => {
       expect(result).toBe(0);
     });
   });
+
+  describe('random(n, o)', () => {
+    test('should return a number between n and o (inclusive)', () => {
+      const n = 5;
+      const o = 10;
+      const result = fb.randomNtoO(n, o);  // Using fb.random(n, o)
+  
+      // Check that the result is a number
+      expect(typeof result).toBe('number');
+  
+      // Check that the number is between n and o (inclusive)
+      expect(result).toBeGreaterThanOrEqual(n);
+      expect(result).toBeLessThanOrEqual(o);
+    });
+  
+    test('should return different numbers for multiple calls', () => {
+      const n = 5;
+      const o = 10;
+      const result1 = fb.randomNtoO(n, o);  // First call
+      const result2 = fb.randomNtoO(n, o);  // Second call
+  
+      // It's very unlikely that two calls would return exactly the same number
+      expect(result1).not.toBe(result2);
+    });
+  
+    test('should return n when n and o are the same', () => {
+      const n = 7;
+      const o = 7;
+      const result = fb.randomNtoO(n, o);  // n and o are equal
+  
+      // Should always return n when n and o are the same
+      expect(result).toBe(n);
+    });
+  
+    test('should handle negative numbers correctly', () => {
+      const n = -5;
+      const o = -1;
+      const result = fb.randomNtoO(n, o);  // Test with negative numbers
+  
+      // Check that the result is between n and o (inclusive)
+      expect(result).toBeGreaterThanOrEqual(n);
+      expect(result).toBeLessThanOrEqual(o);
+    });
+  });

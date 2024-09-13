@@ -221,3 +221,54 @@ describe('flip(t)', () => {
       expect(() => fb.flip(1.5)).toThrow();   // Adjust based on your expected behavior
     });
   });
+
+ describe('dieRoll', () => {
+  
+    test('should roll a single die, e.g., d6', () => {
+      const result = fb.dieRoll('d6');
+      
+      // Check that the result is between 1 and 6
+      expect(result).toBeGreaterThanOrEqual(1);
+      expect(result).toBeLessThanOrEqual(6);
+    });
+  
+    test('should roll multiple dice of the same type, e.g., 3d6', () => {
+      const result = fb.dieRoll('3d6');
+      
+      // Check that the result is between 3 and 18 (since each d6 gives a result between 1 and 6)
+      expect(result).toBeGreaterThanOrEqual(3);
+      expect(result).toBeLessThanOrEqual(18);
+    });
+  
+    test('should handle mixed dice, e.g., 2d6+1d4', () => {
+      const result = fb.dieRoll('2d6+1d4');
+      
+      // The result should be between 3 (2 * 1 from 2d6 + 1 from 1d4) and 16 (2 * 6 from 2d6 + 4 from 1d4)
+      expect(result).toBeGreaterThanOrEqual(3);
+      expect(result).toBeLessThanOrEqual(16);
+    });
+  
+    test('should add a static value, e.g., 1d8+2', () => {
+      const result = fb.dieRoll('1d8+2');
+      
+      // The result should be between 3 (1 from d8 + 2) and 10 (8 from d8 + 2)
+      expect(result).toBeGreaterThanOrEqual(3);
+      expect(result).toBeLessThanOrEqual(10);
+    });
+  
+    test('should handle no dice rolls, just a static value', () => {
+      const result = fb.dieRoll('2');
+      
+      // The result should just be the static value
+      expect(result).toBe(2);
+    });
+  
+    test('should handle complex cases, e.g., 3d6+2d4+5', () => {
+      const result = fb.dieRoll('3d6+2d4+5');
+      
+      // The result should be between 10 (3*1 from 3d6 + 2*1 from 2d4 + 5) and 31 (3*6 from 3d6 + 2*4 from 2d4 + 5)
+      expect(result).toBeGreaterThanOrEqual(10);
+      expect(result).toBeLessThanOrEqual(31);
+    });
+    
+  });

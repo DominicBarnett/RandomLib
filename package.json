@@ -1,6 +1,6 @@
 {
   "name": "@cabbagesoup/random-lib",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "main": "dist/bundle.umd.js",
   "module": "dist/bundle.esm.js",
   "exports": {
@@ -18,7 +18,8 @@
   },
   "files": [
     "dist/",    
-    "README.md", 
+    "README.md",
+    "src/",
     "LICENSE"     
   ],
   "keywords": [],
